@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -255,24 +255,24 @@
             /* =====================================================
            GAMES CONTAINER
         ===================================================== */
-            .games-wrap {
-                background: rgba(255,255,255,0.45);
-                border: 1px solid var(--parchment-dk);
-                border-radius: var(--radius);
-                overflow: hidden;
-            }
-
+        .games-wrap {
+            background: transparent; /* was solid box */
+            border: none;
+            border-radius: 0;
+            overflow: visible;
+            padding: 4px 0;
+        }
             /* loading / empty */
-            .state-box {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 14px;
-                padding: 64px 24px;
-                color: var(--ink-light);
-                font-size: 1.05rem;
-            }
+        .state-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 64px 24px;
+            color: var(--ink-light);
+            font-size: 1.05rem;
+        }
 
                 .state-box .icon {
                     font-size: 2.8rem;
@@ -300,47 +300,53 @@
             /* =====================================================
            GAME GROUP (grouped / date view)
         ===================================================== */
-            .game-group {
-                border-bottom: 2px solid var(--parchment-dk);
+        .game-group {
+            margin: 10px 8px 14px; /* separation between games */
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.75); /* soft neutral base */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+            /* no more connecting bottom border */
+            .game-group:last-child {
+                margin-bottom: 18px;
             }
 
-                .game-group:last-child {
-                    border-bottom: none;
-                }
+        .group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 16px;
+            cursor: pointer;
+            user-select: none;
+        }
 
-            .group-header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                padding: 10px 16px;
-                cursor: pointer;
-                user-select: none;
-            }
-
-            .group-meta {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                flex-wrap: wrap;
-            }
-
+        /* keep meta/actions as they are */
+        .group-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
             .game-date {
                 font-family: 'Space Mono', monospace;
                 font-size: 0.74rem;
                 opacity: 0.8;
             }
-
+        
             .exp-badge {
-                font-size: 0.68rem;
-                font-weight: 700;
-                padding: 2px 8px;
-                border-radius: 12px;
-                text-transform: uppercase;
-                letter-spacing: 0.06em;
-                background: rgba(255,255,255,0.25);
-                border: 1px solid rgba(255,255,255,0.35);
-            }
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: rgba(255,255,255,0.45);
+            border: 1px solid rgba(255,255,255,0.7);
+        }
 
             .winner-tag {
                 font-size: 0.85rem;
@@ -352,26 +358,30 @@
                 flex-shrink: 0;
             }
 
-            /* expansion colour themes */
-            .exp-base {
-                background: var(--base-bg);
-                color: var(--base-text);
-            }
+            /* expansion colour themes (could be background: rgba(46, 125, 50, 0.12); */
+        .game-group.exp-base {
+            background: #DFF2FB;
+            color: var(--ink);
+        }
 
-            .exp-europe {
-                background: var(--europe-bg);
-                color: var(--europe-text);
-            }
+        .game-group.exp-europe {
+            background: #D5DAFC;
+            color: var(--ink);
+        }
 
-            .exp-oceania {
-                background: var(--oceania-bg);
-                color: var(--oceania-text);
-            }
+        .game-group.exp-oceania {
+            background: #F8DBEB;
+            color: var(--ink);
+        }
 
-            .exp-americas {
-                background: var(--americas-bg);
-                color: var(--americas-text);
-            }
+        .game-group.exp-americas {
+            background: #CEF5DA;
+            color: var(--ink);
+        }
+
+
+
+
 
             /* =====================================================
            SCORES TABLE
@@ -409,6 +419,7 @@
 
                     .scores-table td:first-child {
                         text-align: left;
+                        background: rgba(0,0,0,0.055);
                     }
 
                 .scores-table tbody tr:last-child td {
@@ -427,14 +438,15 @@
                     content: '🏆 ';
                 }
 
-            .player-link {
-                cursor: pointer;
-                text-decoration: underline;
-                text-decoration-style: dotted;
-                text-underline-offset: 3px;
-                font-weight: 600;
-                transition: opacity 0.15s;
-            }
+        .player-link {
+            cursor: pointer;
+            color: var(--ink);
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 3px;
+            font-weight: 700;
+            transition: opacity 0.15s;
+        }
 
                 .player-link:hover {
                     opacity: 0.6;
@@ -462,20 +474,37 @@
             /* =====================================================
            SORTED FLAT VIEW
         ===================================================== */
-            .sorted-row {
-                display: grid;
-                grid-template-columns: 2fr 120px 1fr;
-                align-items: center;
-                gap: 8px;
-                padding: 12px 16px;
-                border-bottom: 1px solid var(--parchment-dk);
-                cursor: pointer;
-                transition: filter 0.15s;
+        .sorted-row {
+            display: grid;
+            grid-template-columns: 2fr 120px 1fr;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: filter 0.15s;
+        }
+
+            .sorted-row.exp-base {
+                background: #DFF2FB;
             }
 
-                .sorted-row:last-child {
-                    border-bottom: none;
-                }
+            .sorted-row.exp-europe {
+                background: #D5DAFC;
+            }
+
+            .sorted-row.exp-oceania {
+                background: #F8DBEB;
+            }
+
+            .sorted-row.exp-americas {
+                background: #CEF5DA;
+            }
+            .sorted-row:last-child {
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
 
                 .sorted-row:hover {
                     filter: brightness(0.96);
@@ -750,9 +779,30 @@
                 transition: all 0.15s;
             }
 
+                .exp-card.exp-base {
+                    background: #DFF2FB;
+                    color: var(--ink);
+                }
+
+                .exp-card.exp-europe {
+                    background: #D5DAFC;
+                    color: var(--ink);
+                }
+
+                .exp-card.exp-oceania {
+                    background: #F8DBEB;
+                    color: var(--ink);
+                }
+
+                .exp-card.exp-americas {
+                    background: #CEF5DA;
+                    color: var(--ink);
+                }
+
                 .exp-card.on {
                     border-color: var(--rust);
                     box-shadow: 0 0 0 3px rgba(181,69,27,0.2);
+                    transform: translateY(-1px);
                 }
 
             /* score input rows in wizard */
@@ -1042,7 +1092,7 @@
         .scores-table td:first-child {
             position: sticky;
             left: 0;
-            background: var(--parchment); /* Match the background to hide text behind it */
+            background: rgba(0,0,0,0.055);
             z-index: 10;
             box-shadow: 2px 0 5px rgba(0,0,0,0.05); /* Slight shadow to show separation */
         }
@@ -1096,15 +1146,15 @@
                 <button class="chip" data-sort="eggs">Eggs</button>
                 <button class="chip" data-sort="food">Food</button>
                 <button class="chip" data-sort="tucked">Tucked</button>
-                <button class="chip" data-sort="hummingbirds">Hummingbirds</button>
                 <button class="chip" data-sort="nectar">Nectar</button>
+                <button class="chip" data-sort="hummingbirds">Hummingbirds</button>
             </div>
             <select id="filter-exp" class="filter-select">
                 <option value="">All Expansions</option>
                 <option value="base">Base Game</option>
                 <option value="europe">Europe</option>
                 <option value="oceania">Oceania</option>
-                <option value="americas">Americas / Asia</option>
+                <option value="americas">Americas</option>
             </select>
         </div>
 
@@ -1159,262 +1209,351 @@
     <div id="toast" class="toast hidden"></div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- ════════════════════════════════════ APP SCRIPT -->
     <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-      getFirestore, collection, getDocs, addDoc, updateDoc,
-      deleteDoc, doc, serverTimestamp, query, orderBy
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import {
+            getFirestore, collection, getDocs, addDoc, updateDoc,
+            deleteDoc, doc, setDoc, serverTimestamp, query, orderBy
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    /* ── Firebase config ── */
-    const firebaseConfig = {
-      apiKey:            "AIzaSyA9PBXlWYlK3bhZpQMp1prW0_tpPc69VRI",
-      authDomain:        "wingspan-7c9d2.firebaseapp.com",
-      projectId:         "wingspan-7c9d2",
-      storageBucket:     "wingspan-7c9d2.firebasestorage.app",
-      messagingSenderId: "837151342386",
-      appId:             "1:837151342386:web:f7d3c1d2da3c534e42212b",
-      measurementId:     "G-0QRZMFT5SE"
-    };
+        /* ── Firebase config ── */
+        const firebaseConfig = {
+            apiKey: "AIzaSyA9PBXlWYlK3bhZpQMp1prW0_tpPc69VRI",
+            authDomain: "wingspan-7c9d2.firebaseapp.com",
+            projectId: "wingspan-7c9d2",
+            storageBucket: "wingspan-7c9d2.firebasestorage.app",
+            messagingSenderId: "837151342386",
+            appId: "1:837151342386:web:f7d3c1d2da3c534e42212b",
+            measurementId: "G-0QRZMFT5SE"
+        };
 
-    const fbApp = initializeApp(firebaseConfig);
-    const db    = getFirestore(fbApp);
+        const fbApp = initializeApp(firebaseConfig);
+        const db = getFirestore(fbApp);
 
-    /* ══════════════════════════════════════════════════
-       CONSTANTS
-    ══════════════════════════════════════════════════ */
-    const CATS = [
-      { key:"birds",  label:"Birds",        emoji:"🦅", desc:"Points from bird cards placed in your habitats." },
-      { key:"bonus",  label:"Bonus Cards",  emoji:"🎯", desc:"Points scored from your bonus card objectives." },
-      { key:"roundEnd", label:"Round End",  emoji:"🏁", desc:"Points scored from end-of-round goals." },
-      { key:"eggs",   label:"Eggs",         emoji:"🥚", desc:"Egg tokens remaining on your bird cards." },
-      { key:"food",   label:"Food",         emoji:"🌾", desc:"Food tokens cached on bird cards." },
-      { key:"tucked", label:"Tucked Cards", emoji:"📋", desc:"Cards tucked under bird cards." },
-      { key:"hummingbirds", label:"Hummingbirds", emoji:"🐦", desc:"Points from hummingbird mechanics (expansion rule)." },
-      { key:"nectar", label:"Nectar",       emoji:"🍯", desc:"Nectar tokens (Oceania expansion)." },
-    ];
+        /* ══════════════════════════════════════════════════
+           CONSTANTS
+        ══════════════════════════════════════════════════ */
+        const CATS = [
+            { key: "birds", label: "Birds", emoji: "🦅", desc: "Points from bird cards placed in your habitats." },
+            { key: "bonus", label: "Bonus Cards", emoji: "🎯", desc: "Points scored from your bonus card objectives." },
+            { key: "roundEnd", label: "Round End", emoji: "🏁", desc: "Points scored from end-of-round goals." },
+            { key: "eggs", label: "Eggs", emoji: "🥚", desc: "Egg tokens remaining on your bird cards." },
+            { key: "food", label: "Food", emoji: "🌾", desc: "Food tokens cached on bird cards." },
+            { key: "tucked", label: "Tucked Cards", emoji: "🃏", desc: "Cards tucked under bird cards." },
+            { key: "nectar", label: "Nectar", emoji: "🌸", desc: "Nectar tokens (Oceania expansion)." },
+            { key: "hummingbirds", label: "Hummingbirds", emoji: "🐦", desc: "Points from hummingbird mechanics (expansion rule)." },
+        ];
 
-    const EXPS = [
-      { key:"base",     label:"Base Game",     cls:"exp-base"     },
-      { key:"europe",   label:"Europe",        cls:"exp-europe"   },
-      { key:"oceania",  label:"Oceania",       cls:"exp-oceania"  },
-      { key:"americas", label:"Americas/Asia", cls:"exp-americas" },
-    ];
+        const EXPS = [
+            { key: "americas", label: "Americas", cls: "exp-americas" },
+            { key: "oceania", label: "Oceania", cls: "exp-oceania" },
+            { key: "europe", label: "Europe", cls: "exp-europe" },
+            { key: "base", label: "Base Game", cls: "exp-base" },
+        ];
 
-    /* ══════════════════════════════════════════════════
-       STATE
-    ══════════════════════════════════════════════════ */
-    const S = {
-      games:   [],
-      players: [],
-      sortBy:  "date",
-      filterEx:"",
-    };
+        /* ══════════════════════════════════════════════════
+           STATE
+        ══════════════════════════════════════════════════ */
+        const S = {
+            games: [],
+            players: [],
+            sortBy: "date",
+            filterEx: "",
+        };
 
-    /* ══════════════════════════════════════════════════
-       FIREBASE
-    ══════════════════════════════════════════════════ */
-    async function fetchGames() {
-      const q    = query(collection(db, "games"), orderBy("createdAt","desc"));
-      const snap = await getDocs(q);
-      return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    }
-    async function fbAdd(data)       { return (await addDoc(collection(db,"games"), { ...data, createdAt: serverTimestamp() })).id; }
-    async function fbUpdate(id,data) { await updateDoc(doc(db,"games",id), { ...data, updatedAt: serverTimestamp() }); }
-    async function fbDelete(id)      { await deleteDoc(doc(db,"games",id)); }
+        /* ══════════════════════════════════════════════════
+           FIREBASE
+        ══════════════════════════════════════════════════ */
+        async function fetchGames() {
+            const q = query(collection(db, "games"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        }
+        async function fbAdd(data) { return (await addDoc(collection(db, "games"), { ...data, createdAt: serverTimestamp() })).id; }
+        async function fbUpdate(id, data) { await updateDoc(doc(db, "games", id), { ...data, updatedAt: serverTimestamp() }); }
+        async function fbDelete(id) { await deleteDoc(doc(db, "games", id)); }
 
-    /* ══════════════════════════════════════════════════
-       HELPERS
-    ══════════════════════════════════════════════════ */
-    const total  = s => CATS.reduce((n, c) => n + (Number(s[c.key]) || 0), 0);
-    const expCls = k => EXPS.find(e => e.key === k)?.cls || "exp-base";
-    const expLbl = k => EXPS.find(e => e.key === k)?.label || "Base Game";
-    const winner = g => {
-      let best = null, hi = -1;
-      for (const ps of g.playerScores) { const t = total(ps.scores); if (t > hi) { hi = t; best = ps.player; } }
-      return best;
-    };
+        const normalizePlayerKey = (name) =>
+            name
+                .trim()
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-+|-+$/g, "");
 
-    /* ══════════════════════════════════════════════════
-       RENDER
-    ══════════════════════════════════════════════════ */
-    function render() {
-      const list = document.getElementById("games-list");
-      const load = document.getElementById("loading");
-      const emp  = document.getElementById("empty");
-      load.classList.add("hidden");
-      list.innerHTML = "";
+        async function fetchPlayers() {
+            const snap = await getDocs(collection(db, "players"));
+            return snap.docs
+                .map(d => d.data()?.name?.trim())
+                .filter(Boolean)
+                .sort((a, b) => a.localeCompare(b));
+        }
 
-      let games = [...S.games];
-      if (S.filterEx) games = games.filter(g => g.expansion === S.filterEx);
+        async function ensurePlayers(names) {
+            const unique = [...new Set(names.map(n => n.trim()).filter(Boolean))];
+            await Promise.all(unique.map(async (name) => {
+                const id = normalizePlayerKey(name);
+                if (!id) return;
+                await setDoc(doc(db, "players", id), {
+                    name,
+                    createdAt: serverTimestamp(),
+                    updatedAt: serverTimestamp()
+                }, { merge: true });
+            }));
+        }
 
-      if (!games.length) { emp.classList.remove("hidden"); return; }
-      emp.classList.add("hidden");
+        /* ══════════════════════════════════════════════════
+           HELPERS
+        ══════════════════════════════════════════════════ */
+        const total = s => CATS.reduce((n, c) => n + (Number(s[c.key]) || 0), 0);
+        const expCls = k => EXPS.find(e => e.key === k)?.cls || "exp-base";
+        const expLbl = k => EXPS.find(e => e.key === k)?.label || "Base Game";
 
-      if (S.sortBy === "date") renderGrouped(games, list);
-      else                     renderSorted(games, list);
-    }
+        function visibleCatsForExpansion(expansion) {
+            if (expansion === "base" || expansion === "europe") {
+                return CATS.filter(c => c.key !== "hummingbirds" && c.key !== "nectar");
+            }
+            if (expansion === "oceania") {
+                return CATS.filter(c => c.key !== "hummingbirds");
+            }
+            return CATS;
+        }
 
-    function renderGrouped(games, list) {
-      games.forEach(g => {
-        const w   = winner(g);
-        const div = document.createElement("div");
-        div.className = "game-group";
-        div.innerHTML = `
-          <div class="group-header ${expCls(g.expansion)}" data-id="${g.id}">
-            <div class="group-meta">
-              <span class="game-date">${g.date || "—"}</span>
-              <span class="exp-badge">${expLbl(g.expansion)}</span>
-              <span class="winner-tag">🏆 ${w}</span>
-            </div>
-            <div class="group-actions">
-              <button class="btn-icon" data-action="edit"   data-id="${g.id}" title="Edit">✏️</button>
-              <button class="btn-icon" data-action="delete" data-id="${g.id}" title="Delete">🗑️</button>
-            </div>
-          </div>
-          <div class="table-body">${buildTable(g)}</div>
-        `;
+        function visibleKeysForExpansion(expansion) {
+            return new Set(visibleCatsForExpansion(expansion).map(c => c.key));
+        }
 
-        // header click → collapse table
-        div.querySelector(".group-header").addEventListener("click", e => {
-          if (e.target.closest("[data-action]")) return;
-          const tb = div.querySelector(".table-body");
-          tb.style.display = tb.style.display === "none" ? "" : "none";
-        });
+        const winner = g => {
+            let best = null, hi = -1;
+            for (const ps of g.playerScores) { const t = total(ps.scores); if (t > hi) { hi = t; best = ps.player; } }
+            return best;
+        };
 
-        // edit / delete
-        div.querySelectorAll("[data-action]").forEach(btn => {
-          btn.addEventListener("click", e => {
-            e.stopPropagation();
-            btn.dataset.action === "edit"   ? openWizard(g.id)   : confirmDelete(g.id);
-          });
-        });
+        /* ══════════════════════════════════════════════════
+           RENDER
+        ══════════════════════════════════════════════════ */
+        function render() {
+            const list = document.getElementById("games-list");
+            const load = document.getElementById("loading");
+            const emp = document.getElementById("empty");
+            load.classList.add("hidden");
+            list.innerHTML = "";
 
-        // player links + score cell clicks
-        div.querySelectorAll(".player-link").forEach(el =>
-          el.addEventListener("click", () => openProfile(el.dataset.player))
-        );
-        div.querySelectorAll(".score-cell").forEach(el =>
-          el.addEventListener("click", () => openDetail(el.dataset.gid))
-        );
+            let games = [...S.games];
+            if (S.filterEx) games = games.filter(g => g.expansion === S.filterEx);
 
-        list.appendChild(div);
-      });
-    }
+            if (!games.length) { emp.classList.remove("hidden"); return; }
+            emp.classList.add("hidden");
 
-    function buildTable(g) {
-      const sorted = [...g.playerScores].sort((a,b) => total(b.scores) - total(a.scores));
-      const w = sorted[0]?.player;
-      const heads = CATS.map(c => `<th>${c.emoji} <span class="cat-label">${c.label}</span></th>`).join("");
-      const rows  = sorted.map(ps => {
-        const t    = total(ps.scores);
-        const isW  = ps.player === w;
-        const cells= CATS.map(c =>
-          `<td><span class="score-cell" data-gid="${g.id}">${ps.scores[c.key] ?? 0}</span></td>`
-        ).join("");
-        return `<tr class="${isW ? "winner-row" : ""}">
+            if (S.sortBy === "date") renderGrouped(games, list);
+            else renderSorted(games, list);
+        }
+
+        function renderGrouped(games, list) {
+            games.forEach(g => {
+                const w = winner(g);
+                const div = document.createElement("div");
+                div.className = "game-group " + expCls(g.expansion);
+
+                div.innerHTML = `
+      <div class="group-header" data-id="${g.id}">
+        <div class="group-meta">
+          <span class="game-date">${g.date || "—"}</span>
+          <span class="exp-badge">${expLbl(g.expansion)}</span>
+          <span class="winner-tag">🏆 ${w}</span>
+        </div>
+        <div class="group-actions">
+          <button class="btn-icon" data-action="edit" data-id="${g.id}" title="Edit">✏️</button>
+          <button class="btn-icon" data-action="delete" data-id="${g.id}" title="Delete">🗑️</button>
+        </div>
+      </div>
+      <div class="table-body">${buildTable(g)}</div>
+    `;
+
+                div.querySelector(".group-header").addEventListener("click", e => {
+                    if (e.target.closest("[data-action]")) return;
+                    const tb = div.querySelector(".table-body");
+                    tb.style.display = tb.style.display === "none" ? "" : "none";
+                });
+
+                div.querySelectorAll("[data-action]").forEach(btn => {
+                    btn.addEventListener("click", e => {
+                        e.stopPropagation();
+                        btn.dataset.action === "edit" ? openWizard(g.id) : confirmDelete(g.id);
+                    });
+                });
+
+                div.querySelectorAll(".player-link").forEach(el =>
+                    el.addEventListener("click", () => openProfile(el.dataset.player))
+                );
+                div.querySelectorAll(".score-cell").forEach(el =>
+                    el.addEventListener("click", () => openDetail(el.dataset.gid))
+                );
+
+                list.appendChild(div);
+            });
+        }
+
+        function buildTable(g) {
+            const sorted = [...g.playerScores].sort((a, b) => total(b.scores) - total(a.scores));
+            const w = sorted[0]?.player;
+            const heads = CATS.map(c => `<th>${c.emoji} <span class="cat-label">${c.label}</span></th>`).join("");
+            const rows = sorted.map(ps => {
+                const t = total(ps.scores);
+                const isW = ps.player === w;
+                const cells = CATS.map(c =>
+                    `<td><span class="score-cell" data-gid="${g.id}">${ps.scores[c.key] ?? "-"}</span></td>`
+                ).join("");
+                return `<tr class="${isW ? "winner-row" : ""}">
           <td><span class="player-link" data-player="${ps.player}">${ps.player}</span></td>
           ${cells}
           <td class="total-cell">${t}</td>
         </tr>`;
-      }).join("");
-      return `<table class="scores-table">
+            }).join("");
+            return `<table class="scores-table">
         <thead><tr><th>Player</th>${heads}<th>Total</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>`;
-    }
+        }
 
-    function renderSorted(games, list) {
-      const cat = CATS.find(c => c.key === S.sortBy);
-      const rows = [];
-      games.forEach(g => {
-        g.playerScores.forEach(ps => {
-          rows.push({ g, player: ps.player, scores: ps.scores,
-            val: Number(ps.scores[S.sortBy]) || 0, tot: total(ps.scores) });
-        });
-      });
-      rows.sort((a,b) => b.val - a.val);
+        function renderSorted(games, list) {
+            const cat = CATS.find(c => c.key === S.sortBy);
+            const rows = [];
 
-      rows.forEach(r => {
-        const div = document.createElement("div");
-        div.className = `sorted-row ${expCls(r.g.expansion)}`;
-        div.innerHTML = `
-          <div>
-            <div class="sorted-player">${r.player}</div>
-            <div class="sorted-sub">${r.g.date || "—"} · ${expLbl(r.g.expansion)}</div>
-          </div>
-          <div>
-            <div class="sorted-score">${r.val}</div>
-            <div class="sorted-score-label">${cat.emoji} ${cat.label}</div>
-          </div>
-          <div class="sorted-total">Total: <strong>${r.tot}</strong></div>
-        `;
-        div.addEventListener("click", () => openDetail(r.g.id));
-        list.appendChild(div);
-      });
-    }
+            games.forEach(g => {
+                g.playerScores.forEach(ps => {
+                    const tot = total(ps.scores);
+                    rows.push({
+                        g,
+                        player: ps.player,
+                        scores: ps.scores,
+                        val: S.sortBy === "total"
+                            ? tot
+                            : (Number(ps.scores[S.sortBy]) || 0),
+                        tot
+                    });
+                });
+            });
 
-    /* ══════════════════════════════════════════════════
-       DETAIL MODAL
-    ══════════════════════════════════════════════════ */
-    function openDetail(gameId) {
-      const g = S.games.find(x => x.id === gameId);
-      if (!g) return;
-      const w = winner(g);
-      const body = document.getElementById("detail-body");
-      body.innerHTML = `
+            rows.sort((a, b) => b.val - a.val);
+
+            rows.forEach(r => {
+                const div = document.createElement("div");
+                div.className = `sorted-row ${expCls(r.g.expansion)}`;
+                div.innerHTML = `
+      <div>
+        <div class="sorted-player">${r.player}</div>
+        <div class="sorted-sub">${r.g.date || "—"} · ${expLbl(r.g.expansion)}</div>
+      </div>
+      <div>
+        <div class="sorted-score">${r.val}</div>
+        <div class="sorted-score-label">
+          ${S.sortBy === "total" ? "🏆 Total" : `${cat.emoji} ${cat.label}`}
+        </div>
+      </div>
+      <div class="sorted-total">Total: <strong>${r.tot}</strong></div>
+    `;
+                div.addEventListener("click", () => openDetail(r.g.id));
+                list.appendChild(div);
+            });
+        }
+
+        /* ══════════════════════════════════════════════════
+           DETAIL MODAL
+        ══════════════════════════════════════════════════ */
+        function openDetail(gameId) {
+            const g = S.games.find(x => x.id === gameId);
+            if (!g) return;
+            const w = winner(g);
+            const body = document.getElementById("detail-body");
+            body.innerHTML = `
         <div class="detail-head ${expCls(g.expansion)}">
           <h2>${expLbl(g.expansion)} — ${g.date || "—"}</h2>
           <p>Winner: 🏆 ${w}${g.notes ? ` · "${g.notes}"` : ""}</p>
         </div>
         <div class="detail-body">${buildTable(g)}</div>
       `;
-      body.querySelectorAll(".player-link").forEach(el =>
-        el.addEventListener("click", () => {
-          document.getElementById("detail-overlay").classList.add("hidden");
-          openProfile(el.dataset.player);
-        })
-      );
-      document.getElementById("detail-overlay").classList.remove("hidden");
-    }
+            body.querySelectorAll(".player-link").forEach(el =>
+                el.addEventListener("click", () => {
+                    document.getElementById("detail-overlay").classList.add("hidden");
+                    openProfile(el.dataset.player);
+                })
+            );
+            document.getElementById("detail-overlay").classList.remove("hidden");
+        }
 
-    /* ══════════════════════════════════════════════════
-       PROFILE MODAL
-    ══════════════════════════════════════════════════ */
-    function openProfile(name) {
-      const pGames = S.games.filter(g => g.playerScores.some(ps => ps.player === name));
-      const rows   = pGames.map(g => {
-        const ps = g.playerScores.find(p => p.player === name);
-        const t  = total(ps.scores);
-        const won= winner(g) === name;
-        return { g, ps, t, won };
-      });
+        /* ══════════════════════════════════════════════════
+           PROFILE MODAL
+        ══════════════════════════════════════════════════ */
+        function openProfile(name) {
+            const pGames = S.games.filter(g => g.playerScores.some(ps => ps.player === name));
+            const rows = pGames.map(g => {
+                const ps = g.playerScores.find(p => p.player === name);
+                const t = total(ps.scores);
+                const won = winner(g) === name;
+                return { g, ps, t, won };
+            });
 
-      const n       = rows.length;
-      const wins    = rows.filter(r => r.won).length;
-      const hiScore = n ? Math.max(...rows.map(r => r.t)) : 0;
-      const avgT    = n ? Math.round(rows.reduce((a,r) => a + r.t, 0) / n) : 0;
-      const avgEggs = n ? Math.round(rows.reduce((a,r) => a + (Number(r.ps.scores.eggs)||0), 0) / n) : 0;
-      const avgTuck = n ? Math.round(rows.reduce((a,r) => a + (Number(r.ps.scores.tucked)||0), 0) / n) : 0;
-      const winRate = n ? Math.round((wins/n)*100) : 0;
-      const initials= name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
+            const n = rows.length;
+            const wins = rows.filter(r => r.won).length;
+            const hiScore = n ? Math.max(...rows.map(r => r.t)) : 0;
+            const avgT = n ? Math.round(rows.reduce((a, r) => a + r.t, 0) / n) : 0;
+            const avgEggs = n ? Math.round(rows.reduce((a, r) => a + (Number(r.ps.scores.eggs) || 0), 0) / n) : 0;
+            const avgTuck = n ? Math.round(rows.reduce((a, r) => a + (Number(r.ps.scores.tucked) || 0), 0) / n) : 0;
+            const winRate = n ? Math.round((wins / n) * 100) : 0;
+            const initials = name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
 
-      const histHtml = [...rows]
-        .sort((a,b) => new Date(b.g.date) - new Date(a.g.date))
-        .map(r => `
+            const histHtml = [...rows]
+                .sort((a, b) => new Date(b.g.date) - new Date(a.g.date))
+                .map(r => `
           <div class="history-row">
-            <span class="h-date">${r.g.date||"—"}</span>
+            <span class="h-date">${r.g.date || "—"}</span>
             <span class="h-exp">${expLbl(r.g.expansion)}</span>
             ${r.won ? '<span class="h-win">🏆</span>' : ""}
             <span class="h-score">${r.t}</span>
           </div>`).join("") || '<p style="padding-top:10px;color:var(--ink-light)">No games yet.</p>';
 
-      document.getElementById("profile-body").innerHTML = `
+            document.getElementById("profile-body").innerHTML = `
         <div class="profile-top">
           <div class="avatar">${initials}</div>
           <div class="profile-name">${name}</div>
-          <div class="profile-sub">${n} game${n!==1?"s":""} played</div>
+          <div class="profile-sub">${n} game${n !== 1 ? "s" : ""} played</div>
         </div>
         <div class="stats-grid">
           <div class="stat-card"><div class="stat-val">${winRate}%</div><div class="stat-lbl">Win Rate</div></div>
@@ -1427,63 +1566,66 @@
         <div class="profile-history-title">Game History</div>
         <div class="profile-history">${histHtml}</div>
       `;
-      document.getElementById("profile-overlay").classList.remove("hidden");
-    }
+            document.getElementById("profile-overlay").classList.remove("hidden");
+        }
 
-    /* ══════════════════════════════════════════════════
-       WIZARD
-    ══════════════════════════════════════════════════ */
-    let W = {};  // wizard state
+        /* ══════════════════════════════════════════════════
+           WIZARD
+        ══════════════════════════════════════════════════ */
+        let W = {};
 
-    function wizardSteps() { return ["setup", ...CATS.map(c => c.key)]; }
+        function wizardSteps() {
+            return ["setup", ...visibleCatsForExpansion(W.expansion).map(c => c.key)];
+        }
 
-    function openWizard(gameId = null) {
-      if (gameId) {
-        const g = S.games.find(x => x.id === gameId);
-        W = {
-          step: 0, editId: gameId,
-          players: g.playerScores.map(ps => ps.player),
-          expansion: g.expansion, date: g.date, notes: g.notes || "",
-          scores: Object.fromEntries(g.playerScores.map(ps => [ps.player, {...ps.scores}])),
-        };
-      } else {
-        W = {
-          step: 0, editId: null,
-          players: [], expansion: "base",
-          date: new Date().toISOString().slice(0,10),
-          notes: "", scores: {},
-        };
-      }
-      drawStep();
-      document.getElementById("wizard-overlay").classList.remove("hidden");
-    }
+        function openWizard(gameId = null) {
+            if (gameId) {
+                const g = S.games.find(x => x.id === gameId);
+                W = {
+                    step: 0, editId: gameId,
+                    players: g.playerScores.map(ps => ps.player),
+                    expansion: g.expansion, date: g.date, notes: g.notes || "",
+                    scores: Object.fromEntries(g.playerScores.map(ps => [ps.player, { ...ps.scores }])),
+                };
+            } else {
+                W = {
+                    step: 0, editId: null,
+                    players: [], expansion: "americas",
+                    date: new Date().toISOString().slice(0, 10),
+                    notes: "", scores: {},
+                };
+            }
+            drawStep();
+            document.getElementById("wizard-overlay").classList.remove("hidden");
+        }
 
-    function drawStep() {
-      const steps    = wizardSteps();
-      const stepKey  = steps[W.step];
-      const isLast   = W.step === steps.length - 1;
+        function drawStep() {
+            const steps = wizardSteps();
+            if (W.step >= steps.length) W.step = steps.length - 1;
 
-      // dots
-      document.getElementById("step-dots").innerHTML = steps.map((_,i) =>
-        `<div class="step-dot ${i===W.step?"active":i<W.step?"done":""}"></div>`
-      ).join("");
+            const stepKey = steps[W.step];
+            const isLast = W.step === steps.length - 1;
 
-      document.getElementById("wizard-back").style.visibility = W.step === 0 ? "hidden" : "visible";
-      document.getElementById("wizard-next").textContent = isLast
-        ? (W.editId ? "💾 Save Changes" : "✅ Save Game") : "Next →";
+            document.getElementById("step-dots").innerHTML = steps.map((_, i) =>
+                `<div class="step-dot ${i === W.step ? "active" : i < W.step ? "done" : ""}"></div>`
+            ).join("");
 
-      const body = document.getElementById("wizard-body");
+            document.getElementById("wizard-back").style.visibility = W.step === 0 ? "hidden" : "visible";
+            document.getElementById("wizard-next").textContent = isLast
+                ? (W.editId ? "💾 Save Changes" : "✅ Save Game") : "Next →";
 
-      if (stepKey === "setup") {
-        document.getElementById("wizard-title").textContent = W.editId ? "Edit Game" : "New Game";
-        const pChips = S.players.map(p =>
-          `<button class="pchip ${W.players.includes(p)?"on":""}" data-p="${p}">${p}</button>`
-        ).join("");
-        const eCards = EXPS.map(e =>
-          `<button class="exp-card ${e.cls} ${W.expansion===e.key?"on":""}" data-e="${e.key}">${e.label}</button>`
-        ).join("");
+            const body = document.getElementById("wizard-body");
 
-        body.innerHTML = `
+            if (stepKey === "setup") {
+                document.getElementById("wizard-title").textContent = W.editId ? "Edit Game" : "New Game";
+                const pChips = S.players.map(p =>
+                    `<button class="pchip ${W.players.includes(p) ? "on" : ""}" data-p="${p}">${p}</button>`
+                ).join("");
+                const eCards = EXPS.map(e =>
+                    `<button class="exp-card ${e.cls} ${W.expansion === e.key ? "on" : ""}" data-e="${e.key}">${e.label}</button>`
+                ).join("");
+
+                body.innerHTML = `
           <div class="field">
             <label>Date</label>
             <input type="date" id="w-date" value="${W.date}" />
@@ -1506,227 +1648,250 @@
           </div>
         `;
 
-        body.querySelectorAll(".pchip").forEach(btn => {
-          btn.addEventListener("click", () => {
-            const p = btn.dataset.p;
-            if (W.players.includes(p)) { W.players = W.players.filter(x=>x!==p); btn.classList.remove("on"); }
-            else                       { W.players.push(p); btn.classList.add("on"); }
-          });
-        });
+                body.querySelectorAll(".pchip").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const p = btn.dataset.p;
+                        if (W.players.includes(p)) { W.players = W.players.filter(x => x !== p); btn.classList.remove("on"); }
+                        else { W.players.push(p); btn.classList.add("on"); }
+                    });
+                });
 
-        body.querySelectorAll(".exp-card").forEach(btn => {
-          btn.addEventListener("click", () => {
-            W.expansion = btn.dataset.e;
-            body.querySelectorAll(".exp-card").forEach(b => b.classList.remove("on"));
-            btn.classList.add("on");
-          });
-        });
+                body.querySelectorAll(".exp-card").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        W.expansion = btn.dataset.e;
+                        W.step = 0;
+                        drawStep();
+                    });
+                });
 
-        const addPlayer = () => {
-          const inp  = document.getElementById("new-player");
-          const name = inp.value.trim();
-          if (!name) return;
-          if (!S.players.includes(name)) S.players.push(name);
-          if (!W.players.includes(name)) W.players.push(name);
-          savePlayers();
-          inp.value = "";
-          drawStep();
-        };
-        document.getElementById("btn-add-p").addEventListener("click", addPlayer);
-        document.getElementById("new-player").addEventListener("keydown", e => { if (e.key==="Enter") addPlayer(); });
+                const addPlayer = () => {
+                    const inp = document.getElementById("new-player");
+                    const name = inp.value.trim();
+                    if (!name) return;
 
-      } else {
-        const cat = CATS.find(c => c.key === stepKey);
-        document.getElementById("wizard-title").textContent = `${cat.emoji} ${cat.label}`;
-        body.innerHTML = `
+                    const existing = S.players.find(p => p.toLowerCase() === name.toLowerCase());
+                    const finalName = existing || name;
+
+                    if (!S.players.includes(finalName)) {
+                        S.players.push(finalName);
+                        S.players.sort((a, b) => a.localeCompare(b));
+                    }
+
+                    if (!W.players.includes(finalName)) {
+                        W.players.push(finalName);
+                    }
+
+                    inp.value = "";
+                    drawStep();
+                };
+
+                document.getElementById("btn-add-p").addEventListener("click", addPlayer);
+                document.getElementById("new-player").addEventListener("keydown", e => {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        addPlayer();
+                    }
+                });
+
+            } else {
+                const cat = visibleCatsForExpansion(W.expansion).find(c => c.key === stepKey);
+                document.getElementById("wizard-title").textContent = `${cat.emoji} ${cat.label}`;
+                body.innerHTML = `
           <p class="cat-title">${cat.emoji} ${cat.label}</p>
           <p class="cat-desc">${cat.desc}</p>
           <div class="score-rows" id="score-rows"></div>
         `;
-        const rows = document.getElementById("score-rows");
-        W.players.forEach(p => {
-          const val = W.scores[p]?.[cat.key] ?? 0;
-          const row = document.createElement("div");
-          row.className = "score-row";
-          row.innerHTML = `<label>${p}</label>
+                const rows = document.getElementById("score-rows");
+                W.players.forEach(p => {
+                    const val = W.scores[p]?.[cat.key] ?? 0;
+                    const row = document.createElement("div");
+                    row.className = "score-row";
+                    row.innerHTML = `<label>${p}</label>
             <input type="number" min="0" max="200" data-p="${p}" value="${val}" />`;
-          rows.appendChild(row);
-        });
-        const inputs = rows.querySelectorAll("input");
-        if (inputs[0]) setTimeout(() => inputs[0].focus(), 40);
-        inputs.forEach((inp, i) => {
-          inp.addEventListener("keydown", e => {
-            if (e.key === "Enter" || e.key === "Tab") {
-              e.preventDefault();
-              inputs[i+1] ? inputs[i+1].focus() : document.getElementById("wizard-next").click();
+                    rows.appendChild(row);
+                });
+                const inputs = rows.querySelectorAll("input");
+                if (inputs[0]) setTimeout(() => inputs[0].focus(), 40);
+                inputs.forEach((inp, i) => {
+                    inp.addEventListener("keydown", e => {
+                        if (e.key === "Enter" || e.key === "Tab") {
+                            e.preventDefault();
+                            inputs[i + 1] ? inputs[i + 1].focus() : document.getElementById("wizard-next").click();
+                        }
+                    });
+                });
             }
-          });
-        });
-      }
-    }
-
-    function collectStep() {
-      const steps   = wizardSteps();
-      const stepKey = steps[W.step];
-
-      if (stepKey === "setup") {
-        W.date  = document.getElementById("w-date")?.value  || W.date;
-        W.notes = document.getElementById("w-notes")?.value || "";
-        if (!W.players.length) { toast("Select at least one player.", true); return false; }
-        W.players.forEach(p => { if (!W.scores[p]) W.scores[p] = {}; });
-      } else {
-        document.querySelectorAll(".score-rows input").forEach(inp => {
-          if (!W.scores[inp.dataset.p]) W.scores[inp.dataset.p] = {};
-          W.scores[inp.dataset.p][steps[W.step]] = Number(inp.value) || 0;
-        });
-      }
-      return true;
-    }
-
-    async function wizardNext() {
-      if (!collectStep()) return;
-      const steps = wizardSteps();
-      if (W.step < steps.length - 1) { W.step++; drawStep(); return; }
-      await submitWizard();
-    }
-
-    function wizardBack() {
-      collectStep();
-      if (W.step > 0) { W.step--; drawStep(); }
-    }
-
-    async function submitWizard() {
-      const nextBtn = document.getElementById("wizard-next");
-      nextBtn.disabled = true;
-      nextBtn.textContent = "Saving…";
-
-      const data = {
-        date: W.date, expansion: W.expansion, notes: W.notes,
-        playerScores: W.players.map(p => ({
-          player: p,
-          scores: {
-            birds:  W.scores[p]?.birds  ?? 0,
-            bonus:  W.scores[p]?.bonus  ?? 0,
-            roundEnd: W.scores[p]?.roundEnd ?? 0,
-            eggs:   W.scores[p]?.eggs   ?? 0,
-            food:   W.scores[p]?.food   ?? 0,
-            tucked: W.scores[p]?.tucked ?? 0,
-            hummingbirds: W.scores[p]?.hummingbirds ?? 0,
-            nectar: W.scores[p]?.nectar ?? 0,
-          }
-        }))
-      };
-
-      try {
-        if (W.editId) {
-          S.games = S.games.map(g => g.id === W.editId ? { ...g, ...data } : g);
-          render();
-          await fbUpdate(W.editId, data);
-          toast("Game updated 🦅");
-        } else {
-          const tmp = "tmp_" + Date.now();
-          S.games.unshift({ id: tmp, ...data });
-          render();
-          const realId = await fbAdd(data);
-          S.games = S.games.map(g => g.id === tmp ? { ...g, id: realId } : g);
-          toast("Game saved! 🎉");
         }
-        document.getElementById("wizard-overlay").classList.add("hidden");
-      } catch(err) {
-        console.error(err);
-        toast("Save failed — check Firebase.", true);
-        nextBtn.disabled = false;
-        nextBtn.textContent = W.editId ? "💾 Save Changes" : "✅ Save Game";
-      }
-    }
 
-    /* ══════════════════════════════════════════════════
-       DELETE
-    ══════════════════════════════════════════════════ */
-    function confirmDelete(id) {
-      const g = S.games.find(x => x.id === id);
-      if (!confirm(`Delete game from ${g?.date || "this date"}? This cannot be undone.`)) return;
-      S.games = S.games.filter(x => x.id !== id);
-      render();
-      fbDelete(id).then(() => toast("Game deleted.")).catch(() => {
-        toast("Delete failed.", true);
+        function collectStep() {
+            const steps = wizardSteps();
+            const stepKey = steps[W.step];
+
+            if (stepKey === "setup") {
+                W.date = document.getElementById("w-date")?.value || W.date;
+                W.notes = document.getElementById("w-notes")?.value || "";
+                if (!W.players.length) { toast("Select at least one player.", true); return false; }
+                W.players.forEach(p => { if (!W.scores[p]) W.scores[p] = {}; });
+            } else {
+                document.querySelectorAll(".score-rows input").forEach(inp => {
+                    if (!W.scores[inp.dataset.p]) W.scores[inp.dataset.p] = {};
+                    W.scores[inp.dataset.p][stepKey] = Number(inp.value) || 0;
+                });
+            }
+            return true;
+        }
+
+        async function wizardNext() {
+            if (!collectStep()) return;
+            const steps = wizardSteps();
+            if (W.step < steps.length - 1) { W.step++; drawStep(); return; }
+            await submitWizard();
+        }
+
+        function wizardBack() {
+            collectStep();
+            if (W.step > 0) { W.step--; drawStep(); }
+        }
+
+        async function submitWizard() {
+            const nextBtn = document.getElementById("wizard-next");
+            nextBtn.disabled = true;
+            nextBtn.textContent = "Saving…";
+
+            const visibleKeys = visibleKeysForExpansion(W.expansion);
+
+            const data = {
+                date: W.date, expansion: W.expansion, notes: W.notes,
+                playerScores: W.players.map(p => ({
+                    player: p,
+                    scores: Object.fromEntries(
+                        CATS.map(cat => [
+                            cat.key,
+                            visibleKeys.has(cat.key) ? (W.scores[p]?.[cat.key] ?? 0) : null
+                        ])
+                    )
+                }))
+            };
+
+            try {
+                await ensurePlayers(W.players);
+
+                if (W.editId) {
+                    S.games = S.games.map(g => g.id === W.editId ? { ...g, ...data } : g);
+                    render();
+                    await fbUpdate(W.editId, data);
+                    toast("Game updated 🦅");
+                } else {
+                    const tmp = "tmp_" + Date.now();
+                    S.games.unshift({ id: tmp, ...data });
+                    render();
+                    const realId = await fbAdd(data);
+                    S.games = S.games.map(g => g.id === tmp ? { ...g, id: realId } : g);
+                    toast("Game saved! 🎉");
+                }
+
+                S.players = [...new Set([...S.players, ...W.players])].sort((a, b) => a.localeCompare(b));
+                document.getElementById("wizard-overlay").classList.add("hidden");
+            } catch (err) {
+                console.error(err);
+                toast("Save failed — check Firebase.", true);
+            } finally {
+                nextBtn.disabled = false;
+                nextBtn.textContent = W.editId ? "💾 Save Changes" : "✅ Save Game";
+            }
+        }
+
+        /* ══════════════════════════════════════════════════
+           DELETE
+        ══════════════════════════════════════════════════ */
+        function confirmDelete(id) {
+            const g = S.games.find(x => x.id === id);
+            if (!confirm(`Delete game from ${g?.date || "this date"}? This cannot be undone.`)) return;
+            S.games = S.games.filter(x => x.id !== id);
+            render();
+            fbDelete(id).then(() => toast("Game deleted.")).catch(() => {
+                toast("Delete failed.", true);
+                boot();
+            });
+        }
+
+        /* ══════════════════════════════════════════════════
+           TOAST
+        ══════════════════════════════════════════════════ */
+        let toastTimer;
+        function toast(msg, err = false) {
+            const el = document.getElementById("toast");
+            el.textContent = msg;
+            el.className = "toast" + (err ? " err" : "");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => el.classList.add("hidden"), 3200);
+        }
+
+        /* ══════════════════════════════════════════════════
+           EVENT LISTENERS
+        ══════════════════════════════════════════════════ */
+        document.getElementById("btn-new-game").addEventListener("click", () => openWizard());
+
+        document.getElementById("wizard-next").addEventListener("click", wizardNext);
+        document.getElementById("wizard-back").addEventListener("click", wizardBack);
+        document.getElementById("wizard-close").addEventListener("click", () =>
+            document.getElementById("wizard-overlay").classList.add("hidden"));
+
+        document.getElementById("detail-close").addEventListener("click", () =>
+            document.getElementById("detail-overlay").classList.add("hidden"));
+
+        document.getElementById("profile-close").addEventListener("click", () =>
+            document.getElementById("profile-overlay").classList.add("hidden"));
+
+        ["wizard-overlay", "detail-overlay", "profile-overlay"].forEach(id => {
+            document.getElementById(id).addEventListener("click", e => {
+                if (e.target.id === id) e.target.classList.add("hidden");
+            });
+        });
+
+        document.getElementById("sort-chips").addEventListener("click", e => {
+            const chip = e.target.closest(".chip");
+            if (!chip) return;
+            document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+            chip.classList.add("active");
+            S.sortBy = chip.dataset.sort;
+            render();
+        });
+
+        document.getElementById("filter-exp").addEventListener("change", e => {
+            S.filterEx = e.target.value;
+            render();
+        });
+
+        /* ══════════════════════════════════════════════════
+           BOOT
+        ══════════════════════════════════════════════════ */
+        async function boot() {
+            try {
+                const [games, players] = await Promise.all([
+                    fetchGames(),
+                    fetchPlayers()
+                ]);
+
+                S.games = games;
+
+                const fromGames = [...new Set(
+                    S.games.flatMap(g => g.playerScores.map(ps => ps.player))
+                )].sort((a, b) => a.localeCompare(b));
+
+                S.players = [...new Set([...players, ...fromGames])]
+                    .filter(Boolean)
+                    .sort((a, b) => a.localeCompare(b));
+
+                render();
+            } catch (err) {
+                console.error(err);
+                document.getElementById("loading").innerHTML =
+                    `<p style="color:var(--rust);text-align:center">⚠️ Could not reach Firebase.<br><small>${err.message}</small></p>`;
+            }
+        }
+
         boot();
-      });
-    }
-
-    /* ══════════════════════════════════════════════════
-       TOAST
-    ══════════════════════════════════════════════════ */
-    let toastTimer;
-    function toast(msg, err = false) {
-      const el = document.getElementById("toast");
-      el.textContent = msg;
-      el.className   = "toast" + (err ? " err" : "");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => el.classList.add("hidden"), 3200);
-    }
-
-    /* ══════════════════════════════════════════════════
-       PLAYER STORAGE
-    ══════════════════════════════════════════════════ */
-    function savePlayers() { localStorage.setItem("wsp_players", JSON.stringify(S.players)); }
-    function loadPlayers() { try { return JSON.parse(localStorage.getItem("wsp_players") || "[]"); } catch { return []; } }
-
-    /* ══════════════════════════════════════════════════
-       EVENT LISTENERS
-    ══════════════════════════════════════════════════ */
-    document.getElementById("btn-new-game").addEventListener("click", () => openWizard());
-
-    document.getElementById("wizard-next").addEventListener("click",  wizardNext);
-    document.getElementById("wizard-back").addEventListener("click",  wizardBack);
-    document.getElementById("wizard-close").addEventListener("click", () =>
-      document.getElementById("wizard-overlay").classList.add("hidden"));
-
-    document.getElementById("detail-close").addEventListener("click", () =>
-      document.getElementById("detail-overlay").classList.add("hidden"));
-
-    document.getElementById("profile-close").addEventListener("click", () =>
-      document.getElementById("profile-overlay").classList.add("hidden"));
-
-    ["wizard-overlay","detail-overlay","profile-overlay"].forEach(id => {
-      document.getElementById(id).addEventListener("click", e => {
-        if (e.target.id === id) e.target.classList.add("hidden");
-      });
-    });
-
-    document.getElementById("sort-chips").addEventListener("click", e => {
-      const chip = e.target.closest(".chip");
-      if (!chip) return;
-      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-      chip.classList.add("active");
-      S.sortBy = chip.dataset.sort;
-      render();
-    });
-
-    document.getElementById("filter-exp").addEventListener("change", e => {
-      S.filterEx = e.target.value;
-      render();
-    });
-
-    /* ══════════════════════════════════════════════════
-       BOOT
-    ══════════════════════════════════════════════════ */
-    async function boot() {
-      try {
-        S.games   = await fetchGames();
-        const fromGames   = [...new Set(S.games.flatMap(g => g.playerScores.map(ps => ps.player)))].sort();
-        const fromStorage = loadPlayers();
-        S.players = [...new Set([...fromStorage, ...fromGames])].sort();
-        savePlayers();
-        render();
-      } catch(err) {
-        console.error(err);
-        document.getElementById("loading").innerHTML =
-          `<p style="color:var(--rust);text-align:center">⚠️ Could not reach Firebase.<br><small>${err.message}</small></p>`;
-      }
-    }
-
-    boot();
     </script>
 
 </body>
